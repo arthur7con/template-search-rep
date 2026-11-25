@@ -21,11 +21,17 @@ def print_result(name: str, result):
 
 
 if __name__ == "__main__":
-    initial = State((2, 8, 3, 1, 6, 4, 7, 0, 5))   # ~20 movimentos até a solução
+    exemplos = [
+        State((2, 8, 3, 1, 6, 4, 7, 0, 5)),   # exemplo original (sem solução: paridade ímpar)
+        State((8, 6, 7, 2, 5, 4, 3, 0, 1)),   # 31 movimentos (um dos mais difíceis)
+    ]
 
-    print("Estado inicial:")
-    print(initial)
+    for initial in exemplos:
+        print(f"\n{'#'*40}\nEstado inicial:")
+        print(initial)
+        if not initial.is_solvable():
+            print("(este estado não tem solução — número ímpar de inversões)")
 
-    print_result("BFS",  BFS().search(initial))
-    print_result("DFS",  DFS().search(initial))
-    print_result("A*",   AStar().search(initial))
+        print_result("BFS",  BFS().search(initial))
+        print_result("DFS",  DFS().search(initial))
+        print_result("A*",   AStar().search(initial))
